@@ -1,0 +1,24 @@
+{
+  "name": "aoc2020",
+  "version": "1.0.0",
+  "description": "Advent of Code 2020 solutions",
+  "main": "run.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "./run.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joecullin/aoc2020.git"
+  },
+  "author": "Joe Cullin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joecullin/aoc2020/issues"
+  },
+  "homepage": "https://github.com/joecullin/aoc2020#readme",
+  "dependencies": {
+    "get-stdin": "^8.0.0",
+    "yargs": "^15.4.1"
+  }
+}
