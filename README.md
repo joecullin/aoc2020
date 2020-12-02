@@ -14,7 +14,7 @@ Run a puzzle, for example the second part of day one:
 ./run.js --puzzle=1.2
 ```
 
-My inputs are (in the inputs dir) are used by default.
+My inputs are used by default.
 If you want to use a different input, either pipe it in as stdin or specify a file with the --input parameter.
 ```
 pbpaste | ./run.js --puzzle=1.2
