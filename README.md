@@ -1,4 +1,4 @@
-# Advent of Code 2019
+# Advent of Code 2020
 
 My solutions for https://adventofcode.com/2020
 
@@ -21,3 +21,5 @@ pbpaste | ./run.js --puzzle=1.2
 
 ./run.js --puzzle=1.2 --input=./my-test-file.txt
 ```
+
+I'm logging some notes & thoughts in [journal.md](journal.md).
