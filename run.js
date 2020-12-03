@@ -15,7 +15,7 @@ const solutionPath = `./solutions/${puzzleId}`;
 const solution = require(solutionPath);
 
 let params = {
-    inputPath: "./inputs/01.1.txt",
+    inputPath: `./inputs/${puzzleId}.txt`,
 };
 if (argv.input){
     params.inputPath = argv.input;

@@ -1,7 +1,7 @@
 const fs = require("fs")
 const getStdin = require("get-stdin");
 
-const readLinesNumeric = async (params) => {
+const readLines = async (params) => {
     let input = "";
     if (params.inputPath){
         input = fs.readFileSync(params.inputPath).toString()
@@ -12,10 +12,15 @@ const readLinesNumeric = async (params) => {
     if (typeof input !== "string" || input === ""){
         console.error("empty input?");
     }
-    // console.log("input:", input);
-    return input.split("\n").map(val => parseInt(val));
+    return input.split("\n");
 };
 
+const readLinesNumeric = async (params) => {
+    return readLines(params).map(val => parseInt(val));
+};
+
+
 module.exports = {
+  readLines,
   readLinesNumeric,
 };
