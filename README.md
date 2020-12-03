@@ -2,8 +2,6 @@
 
 My solutions for https://adventofcode.com/2020
 
-Code is in the solutions directory.
-
 Initial setup:
 ```
 npm install
@@ -15,7 +13,7 @@ Run a puzzle, for example the second part of day one:
 ```
 
 My inputs are used by default.
-If you want to use a different input, either pipe it in as stdin or specify a file with the --input parameter.
+If you want to use a different input, either pipe it in as stdin or specify a file with the `--input` parameter. Examples:
 ```
 pbpaste | ./run.js --puzzle=1.2
 
