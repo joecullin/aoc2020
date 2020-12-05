@@ -14,8 +14,9 @@ if (puzzleId.length === 3){
 const solutionPath = `./solutions/${puzzleId}`;
 const solution = require(solutionPath);
 
+const puzzleBase = puzzleId.replace(/[.].*/, '');
 let params = {
-    inputPath: `./inputs/${puzzleId}.txt`,
+    inputPath: `./inputs/${puzzleBase}.txt`,
 };
 if (argv.input){
     params.inputPath = argv.input;
