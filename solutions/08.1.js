@@ -7,9 +7,7 @@ const run = async (params) => {
     let acc = 0;
     let position = 0;
     let seen = {};
-    let iterations = 0;
     while (1){
-        iterations++;
         seen[position] = true;
         const [op, value] = instructions[position].split(' ');
         let next = position;
