@@ -16,7 +16,8 @@ const readLines = async (params) => {
 };
 
 const readLinesNumeric = async (params) => {
-    return readLines(params).map(val => parseInt(val));
+    const lines = await readLines(params);
+    return lines.map(val => parseInt(val));
 };
 
 
