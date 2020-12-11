@@ -1,4 +1,4 @@
-const logger = require("../common/logger-simple");
+
 const {readLines} = require("../common/readInput");
 
 const checkRoute = (params) => {
@@ -14,7 +14,6 @@ const checkRoute = (params) => {
         y += params.route.yStep;
         x += params.route.xStep;
         if (x >= row.length){
-            let xOrig = x;
             x = x - row.length;
         }
     }

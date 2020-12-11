@@ -1,4 +1,4 @@
-const logger = require("../common/logger-simple");
+
 const {readLinesNumeric} = require("../common/readInput");
 
 const run = async (params) => {

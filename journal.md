@@ -1,6 +1,5 @@
 # Misc notes & thoughts.
 
-
 ---
 ## Day 10
 
@@ -17,6 +16,11 @@ https://www.reddit.com/r/adventofcode/comments/ka8z8x/2020_day_10_solutions/gfbt
 
 It was hard to un-see the elegance of the second one. I forced myself to re-type it after glancing at it, but mine is basically an exact copy of it.
 
+
+---
+Added eslint and did some cleanup. To check all:
+
+`npm run lint`
 
 ---
 ## Day 1

@@ -1,9 +1,8 @@
-const logger = require("../common/logger-simple");
+
 const {readLinesNumeric} = require("../common/readInput");
 
 const run = async (params) => {
     const input = await readLinesNumeric({inputPath: params.inputPath});
-    let done = false;
     const windowSize = 25;
 
     let target;

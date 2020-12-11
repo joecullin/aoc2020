@@ -5,7 +5,8 @@
   "main": "run.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "./run.js"
+    "run": "./run.js",
+    "lint": "node_modules/eslint/bin/eslint.js solutions/*.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "dependencies": {
     "get-stdin": "^8.0.0",
     "yargs": "^15.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.15.0"
   }
 }

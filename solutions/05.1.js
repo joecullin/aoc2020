@@ -1,9 +1,7 @@
-const logger = require("../common/logger-simple");
+
 const {readLines} = require("../common/readInput");
 
 const traverse = (spec, bottom, top) => {
-    let min = bottom;
-    let max = top;
     spec.forEach(direction => {
         const half = ((top - bottom) + 1) / 2;
         if (direction === 'U'){

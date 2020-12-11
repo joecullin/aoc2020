@@ -1,4 +1,4 @@
-const logger = require("../common/logger-simple");
+
 const {readLines} = require("../common/readInput");
 
 const run = async (params) => {
@@ -11,7 +11,7 @@ const run = async (params) => {
             const contain = parts[1].split(/[,.]/).filter(part => part !== "");
             let contents = {};
             contain.forEach(bagSpec => {
-                const [_, number, type] = bagSpec.match(/^(\d+) (.*)/);
+                const [, number, type] = bagSpec.match(/^(\d+) (.*)/);
                 contents[type] = parseInt(number);
             });
             mustContain[parts[0]] = contents;
