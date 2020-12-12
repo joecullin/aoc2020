@@ -1,6 +1,15 @@
 # Misc notes & thoughts.
 
 ---
+## Day 11
+
+I blasted out a quick-and-dirty solution for part 1, fully expecting to need a totally different approach for part 2.
+
+I don't know if I was relieved (easy win) or disappointed (wanted a challenge) when part 2 was unveiled. I kept the same O(something_big) approach and it finished quickly.
+
+I'm sure I could come up with something faster or more elegant, but I'm going to take the easy win and call it a night.
+
+---
 ## Day 10
 
 First hard day.
