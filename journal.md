@@ -1,6 +1,11 @@
 # Misc notes & thoughts.
 
 ---
+## Day 12
+
+Another day where the straightforward approach worked fine. I thought I might have to figure out more elegant geometry (or do more ugly brute force) for part 2, but it wasn't too bad.
+
+---
 ## Day 11
 
 I blasted out a quick-and-dirty solution for part 1, fully expecting to need a totally different approach for part 2.
