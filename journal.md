@@ -1,6 +1,15 @@
 # Misc notes & thoughts.
 
 ---
+## Day 13
+
+I knew this would be something like 2019's Day 12 where a simple math insight would make it super quick, but I was too stubborn to google and read hints.
+
+So I let it run while I went out for the day. Came home 10 hours later and it had just finished.
+
+I came up with a couple of other small optimization ideas while I was out, but didn't bother pursuing them since I had my correct answer.
+
+---
 ## Day 12
 
 Another day where the straightforward approach worked fine. I thought I might have to figure out more elegant geometry (or do more ugly brute force) for part 2, but it wasn't too bad.
