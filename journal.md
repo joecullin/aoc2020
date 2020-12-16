@@ -5,6 +5,12 @@
 
 Part 2: Part 1 plus a bonus 15 minutes of maxing out my cpu. But it gets the right answer! Now off to reddit to find out the trick ...
 
+...
+
+Two things I noticed from reddit:
+- Everyone using Map instead of an object. Looks like it's faster. (I'm so spoiled by databases, I've never had to stop and think about that in javascript.) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map#Objects_and_maps_compared
+- My solution tracks the last two values. Lots of people shared solutions that track just the last value.
+
 ---
 ## Day 13
 
