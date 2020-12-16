@@ -12,7 +12,7 @@ const readLines = async (params) => {
     if (typeof input !== "string" || input === ""){
         console.error("empty input?");
     }
-    return input.split("\n");
+    return input.trim().split("\n");
 };
 
 const readLinesNumeric = async (params) => {

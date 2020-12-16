@@ -1,6 +1,11 @@
 # Misc notes & thoughts.
 
 ---
+## Day 15
+
+Part 2: Part 1 plus a bonus 15 minutes of maxing out my cpu. But it gets the right answer! Now off to reddit to find out the trick ...
+
+---
 ## Day 13
 
 I knew this would be something like 2019's Day 12 where a simple math insight would make it super quick, but I was too stubborn to google and read hints.
