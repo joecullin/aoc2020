@@ -1,6 +1,11 @@
 # Misc notes & thoughts.
 
 ---
+## Day 19
+
+Feeling very grateful for the couple of hints included in part two's instructions. I'm sure I would've burned a lot of cycles looking for a generic solution, rather than looking at those two specific rules.
+
+---
 ## Day 15
 
 Part 2: Part 1 plus a bonus 15 minutes of maxing out my cpu. But it gets the right answer! Now off to reddit to find out the trick ...
