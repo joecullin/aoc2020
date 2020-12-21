@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/joecullin/aoc2020#readme",
   "dependencies": {
+    "array-intersection": "^0.1.2",
     "get-stdin": "^8.0.0",
+    "js-combinatorics": "^0.6.1",
     "yargs": "^15.4.1"
   },
   "devDependencies": {
