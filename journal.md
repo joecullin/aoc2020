@@ -2,6 +2,11 @@
 
 
 ---
+## Day 23
+
+Using Map and Set more and more. One thing I'm really liking about Map is that keys don't get turned into strings.
+
+---
 ## Day 22
 
 I should've stuck with calling them player 1 & 2 instead of 0 and 1. I wasted a ton of time optimizing my wrong solution because I had mixed up a zero and a one.
