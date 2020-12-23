@@ -1,5 +1,20 @@
 # Misc notes & thoughts.
 
+
+---
+## Day 22
+
+I should've stuck with calling them player 1 & 2 instead of 0 and 1. I wasted a ton of time optimizing my wrong solution because I had mixed up a zero and a one.
+
+Had a version of my script that ran through nearly a billion rounds before running out of memory.
+
+---
+## Day 20
+
+Part one was easy. It's 3 days later and I'm still working on part two.
+
+I keep working through optimization ideas; haven't broken down and looked for hints yet.
+
 ---
 ## Day 19
 
