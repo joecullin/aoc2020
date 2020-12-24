@@ -2,6 +2,11 @@
 
 
 ---
+## Day 24
+
+Printing out a page of hexagonal graph paper really helped me visualize the steps between tiles.
+
+---
 ## Day 23
 
 Using Map and Set more and more. One thing I'm really liking about Map is that keys don't get turned into strings.
