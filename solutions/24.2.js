@@ -63,7 +63,7 @@ const run = async (params) => {
         if (cached){
             return cached;
         }
-        const neighbors = [ follow(["e"], coords), follow(["w"], coords), follow(["ne"], coords), follow(["nw"], coords), follow(["se"], coords), follow(["sw"], coords) ];
+        const neighbors = ["e", "w", "ne", "nw", "se", "sw"].map(direction => follow([direction], coords));
         allNeighbors.set(coords, neighbors);
         return neighbors;
     };
