@@ -2,6 +2,13 @@
 
 
 ---
+## Day 25
+
+I thought the instructions were confusing. I wasn't sure if subject number 7 was just the example, or if I also needed to find a subject number.
+
+Then I got to part two ... what!!??? At first I thought I had to figure out some trick to unlock the question. Then I got it: I have to go back and finish day 20 first.
+
+---
 ## Day 24
 
 Printing out a page of hexagonal graph paper really helped me visualize the steps between tiles.
