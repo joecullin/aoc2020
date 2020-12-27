@@ -28,9 +28,17 @@ Had a version of my script that ran through nearly a billion rounds before runni
 ---
 ## Day 20
 
-Part one was easy. It's 3 days later and I'm still working on part two.
+Hardest day, definitely.
 
-I keep working through optimization ideas; haven't broken down and looked for hints yet.
+Got the sample input working pretty easily for part 1, but my solution was too slow to finish part 1.
+
+I'll keep working through optimization ideas; haven't broken down and looked for hints yet.
+
+... coming back to this on 12/26. I spent a ton of time trying to optimize part 1 before I noticed that the 4 corners are eay to identify without solving the whole thing.
+
+... looks like I need to solve the whole thing for part 2 though.
+
+
 
 ---
 ## Day 19

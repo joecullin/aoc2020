@@ -42,131 +42,45 @@ const run = async (params) => {
             inputBuffer = [];
         }
     }
-    // console.log(tiles);
 
     let tileEdges = {};
     tiles.forEach(tile => {
         tileEdges[tile.id] = tile.edges;
     });
-    console.log("tiles", tileEdges);
 
-    let gridWidth = Math.sqrt(tiles.length);
+    // pre-filter a list of compatible tile edges
+    let compatibleTiles = {};
+    Object.keys(tileEdges).forEach(tile => {
+        let compatibleEdges = [];
+        tileEdges[tile].forEach( (edge, i) => {
+            Object.keys(tileEdges).filter(otherTile => otherTile !== tile).forEach(otherTile => {
+                tileEdges[otherTile].forEach( (otherEdge, j) => {
+                    if (edge === otherEdge){
+                        compatibleEdges.push({
+                            otherTile,
+                            edge: i,
+                            otherEdge: j,
+                            reversed: false,
+                        });
+                    }
+                    else if (edge === reversed[otherEdge]){
+                        compatibleEdges.push({
+                            otherTile,
+                            edge: i,
+                            otherEdge: j,
+                            reversed: true,
+                        });
+                    }
+                });
+            });
+        });
+        compatibleTiles[tile] = compatibleEdges;
+    });
 
-    const rotatedTile = (tileId, rotation) => {
-            const tile = [...tileEdges[tileId]];
-            if (rotation === 0){
-                return [ ...tile ];
-            }
-            else if (rotation === 1){
-                return [ reversed[tile[3]], tile[0], reversed[tile[1]], tile[2] ];
-            }
-            else if (rotation === 2){
-                return [ reversed[tile[2]], reversed[tile[3]], reversed[tile[0]], reversed[tile[1]] ];
-            }
-            else if (rotation === 3){
-                return [ tile[1], reversed[tile[2]], tile[3], reversed[tile[0]] ];
-            }
-            else if (rotation === 4){
-                return [ tile[2], reversed[tile[1]], tile[0], reversed[tile[3]] ];
-            }
-            else if (rotation === 5){
-                return [ reversed[tile[1]], reversed[tile[0]], reversed[tile[3]], reversed[tile[2]] ];
-            }
-            else if (rotation === 6){
-                return [ reversed[tile[0]], tile[3], reversed[tile[2]], tile[1] ];
-            }
-            else if (rotation === 7){
-                return [ tile[3], tile[2], tile[1], tile[0] ];
-            }
-    };
+    // hah! it turns out there are only 4 tiles with 2 compatible edges --> those have to be the corners.
 
-
-// Stopped Mon night.
-// Next:
-//   - stop passing around arrays?
-//   - If the below function is only looking at this + left + above, why pass in all of tileOrder?
-//   - pre-compute all possible tile rotations so I don't need to call a function every time?
-//
-// ... these don't feel big enough though.
-// step back and look for bigger gains.
-
-
-    const isGoodRotationSequence = (tileOrder, rotationSequence) => {
-        const tileCount = rotationSequence.length;
-
-        if (tileCount < 2 || !rotationSequence.length){
-            return true;
-        }
-        let i = tileCount - 1;
-        const thisTile = rotatedTile(tileOrder[i], rotationSequence[i]);
-
-        // compare this tile to the one on its left
-        if (i % gridWidth !== 0){
-            const leftNeighbor = rotatedTile(tileOrder[i-1], rotationSequence[i-1]);
-            if (leftNeighbor[1] !== thisTile[3]){
-                return false;
-            }
-        }
-        // compare this tile to the one above it
-        if (i > gridWidth){
-            const topNeighbor = rotatedTile(tileOrder[i-gridWidth], rotationSequence[i-gridWidth]);
-            if (topNeighbor[2] !== thisTile[0]){
-                return false;
-            }
-        }
-
-        // console.log("rotated======", rotated);
-        return true;
-    };
-
-    const findGoodSequences = (alphabet, tileOrder, rotationSequence, targetLength) => {
-        if (isGoodRotationSequence(tileOrder, rotationSequence)){
-            if (targetLength === rotationSequence.length){
-                return rotationSequence;
-            }
-    
-            for (let i=0; i<alphabet.length; i++){
-                let tryNext = findGoodSequences(alphabet, tileOrder, [...rotationSequence, alphabet[i]], targetLength);
-                if (tryNext.length){
-                    return tryNext;
-                }
-            }
-        }
-        return [];
-    };
-
-    const findGoodTileOrder = (alphabet, tileOrder, targetLength, depth) => {
-
-        const good = findGoodSequences([0,1,2,3,4,5,6,7], tileOrder, [], tileOrder.length);
-        if (good && good.length === targetLength){
-            return tileOrder;
-        }
-
-        for (let i=0; i<alphabet.length; i++){
-            if (depth===0){
-                console.log(`${i}...`);
-            }
-            let tryNext = findGoodTileOrder(
-                alphabet.filter(tile=>tile!==alphabet[i]), // like an inverse splice - everything but element i
-                [...tileOrder, alphabet[i]],
-                targetLength,
-                depth+1,
-            );
-            if (tryNext.length){
-                return tryNext;
-            }
-        }
-        return [];
-    };
-
-    const good = findGoodTileOrder([...tiles.map(tile => tile.id)], [], gridWidth, 0);
-    console.log("final:", good);
-
-    const topLeft = good[0];
-    const topRight = good[gridWidth-1];
-    const bottomRight = good[good.length-1];
-    const bottomLeft = good[good.length-gridWidth];
-    const answer = topLeft * topRight * bottomRight * bottomLeft;
+    const corners = Object.keys(compatibleTiles).filter(tile => compatibleTiles[tile].length === 2);
+    const answer = corners.reduce( (acc, cur) => acc * cur, 1);
     console.log(`answer: ${answer}`);
 };
 
