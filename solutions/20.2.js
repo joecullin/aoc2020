@@ -164,7 +164,7 @@ const run = async (params) => {
         ];
     };
 
-    const tileContents = (textOrig, rotations, flipVertical, flipHorizontal, dontChop) => {
+    const tileContents = (textOrig, rotations, flipVertical, flipHorizontal, chopBorder) => {
         let text = [...textOrig];
         for (let i=0; i<rotations; i++){
             let newText = text.map( () => "");
@@ -186,7 +186,7 @@ const run = async (params) => {
         }
 
         // chop off borders
-        if (!dontChop){
+        if (chopBorder){
             text.shift();     
             text.pop();     
             text = text.map(row => {
@@ -209,7 +209,7 @@ const run = async (params) => {
         alignment: firstTileAlignment,
         rotations: firstTileRotation,
         flip: true,
-        text: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tileOrder[0])).text, firstTileRotation, true, false),
+        text: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tileOrder[0])).text, firstTileRotation, true, false, true),
     }];
 
     // finish out the top row
@@ -240,7 +240,7 @@ const run = async (params) => {
             alignment,
             rotations,
             flip,
-            text: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tile)).text, rotations, flip, false),
+            text: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tile)).text, rotations, flip, false, true),
         });
     }
 
@@ -272,7 +272,7 @@ const run = async (params) => {
             alignment,
             rotations,
             flip,
-            text: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tile)).text, rotations, false, flip),
+            text: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tile)).text, rotations, false, flip, true),
         });
     }
 
@@ -282,13 +282,10 @@ const run = async (params) => {
 
     let image = [];
     for (let tileRow=0; tileRow<gridWidth; tileRow++){
-        console.log(`tileRow ${tileRow}`);
         for (let row=0; row<tileWidth; row++){
             const imageRowNum = (tileRow*tileWidth) + row;
-            console.log(`row: ${row} imageRowNum ${imageRowNum}`);
             let imageRow = "";
             for (let tileCol=0; tileCol<gridWidth; tileCol++){
-                console.log(`getting tile ${(tileRow*gridWidth) + tileCol}`);
                 const text = tileLayout[ (tileRow*gridWidth) + tileCol ].text;
                 // imageRow += "  " + text[row];
                 imageRow += text[row];
@@ -299,35 +296,57 @@ const run = async (params) => {
     }
 
     let perspectives = [];
-    for (let i=0; i<3; i++){
-        perspectives.push(tileContents(image, i, false, false, true));
-        perspectives.push(tileContents(image, i, true, false, true));
+    for (let i=0; i<4; i++){
+        perspectives.push(tileContents(image, i, false, false, false));
+        perspectives.push(tileContents(image, i, true, false, false));
     }
 
-// I'm good up to here. Now I need to find my monsters.
+    const monsterTop = /^..................#/;
+    const monsterMiddle = /#....##....##....###/g;
+    const monsterBottom = /^.#..#..#..#..#..#/;
 
-// doh! -- this would only work for an image the same width as the monster (20 chars).
-
-// Should I walk through the whole grid pixel by pixel looking for a monster?
-// Should I find the middle and then look ahead and behind?
-// Should I subdivide into smaller width images and use the below regex?
-
-
-    const monster = /#_0#____##____##____###0_#__#__#__#__#__#/g;
     for (let i=0; i<perspectives.length; i++){
         const image = perspectives[i];
-        // console.log(image.join("\n"));
-        const checkImage = image.join("0").replace(/[.]/g, '_');
-        console.log("\nchecking", checkImage);
-        if (monster.test(image)){
-            console.log(`Found monsters!`);
+        // const checkImage = image.join("\n");
+        // console.log(`\nchecking ${i}\n`, checkImage);
+        let monsterCount = 0;
+        for (let j=1; j<image.length-1; j++){
+            const matches = [...image[j].matchAll(monsterMiddle)];
+            matches.forEach(match => {
+                const prevLine = image[j-1].substring(match.index);
+                const thisLine = image[j].substring(match.index);
+                const nextLine = image[j+1].substring(match.index);
+                if (monsterTop.test(prevLine) && monsterBottom.test(nextLine)){
+                    console.log(`\nlines ${j-1}-${j+1} cols ${match.index}-${match.index+20}:\n${prevLine}\n${thisLine}\n${nextLine}`);
+                    monsterCount++;
+                }
+            });
+        }
+        if (monsterCount){
+            console.log(`FOUND MONSTER ${i}`);
+
+            console.log(image.join("\n"));
+
+            const countHashes = [...image.join('').matchAll(/(#)/g)].length;
+            console.log(`hashes: ${countHashes}`);
+            console.log(`monsters: ${monsterCount}`);
+            const answer = countHashes - (15 * monsterCount);
+            console.log(`answer: ${answer}`);
             break;
         }
     }
 
-
-
 };
+
+// Getting the right answer for sample input.
+// Getting a reasonable answer for my input.
+// Next things to try:
+//  - maybe there are overlapping monsters that I'm not picking up?
+
+
+// 1875 - too high
+// 1860 - (just a guess) too high
+// 1845 - (just a guess) too high
 
 
 module.exports = { run };
