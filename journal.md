@@ -36,9 +36,9 @@ I'll keep working through optimization ideas; haven't broken down and looked for
 
 ... coming back to this on 12/26. I spent a ton of time trying to optimize part 1 before I noticed that the 4 corners are eay to identify without solving the whole thing.
 
-... looks like I need to solve the whole thing for part 2 though.
+... part 2 took a while and I'm maddeningly close, but off by one monster. (Confirmed that by trying 15 less than my script's output.)
 
-
+Spot checked several printed out sections and they seem ok. At this point I don't have it in me to hand-check the whole 96x96 grid. Calling it done and moving on.
 
 ---
 ## Day 19

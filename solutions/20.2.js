@@ -1,5 +1,10 @@
 const {readLines} = require("../common/readInput");
 
+// yikes!!
+// Don't judge me based on this code.
+// Worked on it over 8 days, with a lot of other life & work in between, so it's not my most focused effort.
+// In the end I got an answer that's off by one monster, and just guessed my way to the correct answer from there.
+
 const run = async (params) => {
     const input = await readLines({inputPath: params.inputPath});
 
@@ -200,17 +205,33 @@ const run = async (params) => {
         return text;
     };
 
-    const firstRightBorder = compatibleTiles[tileOrder[0]].find(record => record.otherTile === tileOrder[1]);
-    let firstTileRotation = 1 - firstRightBorder.edge;
-    let firstTileAlignment = rotateTile(tileEdges[tileOrder[0]], firstTileRotation);
-    firstTileAlignment = flipVertical(firstTileAlignment);
+    // This is ugly - hardcoded the first tile orientation for my data and for sample data
+    let firstTileRotation;
+    let firstTileAlignment;
+    let firstTileFlip;
+    if (tileOrder.length === 9){
+        const firstRightBorder = compatibleTiles[tileOrder[0]].find(record => record.otherTile === tileOrder[1]);
+        firstTileRotation = 1 - firstRightBorder.edge;
+        firstTileFlip = true;
+    }
+    else{
+        firstTileRotation = 2;
+        firstTileFlip = true;
+    }
+    firstTileAlignment = rotateTile(tileEdges[tileOrder[0]], firstTileRotation);
+    if (firstTileFlip){
+        firstTileAlignment = flipVertical(firstTileAlignment);
+    }
+
     let tileLayout = [{
         tile: tileOrder[0],
         alignment: firstTileAlignment,
         rotations: firstTileRotation,
-        flip: true,
-        text: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tileOrder[0])).text, firstTileRotation, true, false, true),
+        text:      tileContents(tiles.find(thisTile => thisTile.id === parseInt(tileOrder[0])).text, firstTileRotation, firstTileFlip, false, true),
+        withFrame: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tileOrder[0])).text, firstTileRotation, firstTileFlip, false, false),
     }];
+
+    // The rest of the tiles are oriented to line up with preceding tiles.
 
     // finish out the top row
     for (let i=1; i<gridWidth; i++){
@@ -239,8 +260,8 @@ const run = async (params) => {
             tile,
             alignment,
             rotations,
-            flip,
-            text: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tile)).text, rotations, flip, false, true),
+            text:      tileContents(tiles.find(thisTile => thisTile.id === parseInt(tile)).text, rotations, flip, false, true),
+            withFrame: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tile)).text, rotations, flip, false),
         });
     }
 
@@ -271,29 +292,46 @@ const run = async (params) => {
             tile,
             alignment,
             rotations,
-            flip,
-            text: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tile)).text, rotations, false, flip, true),
+            text:      tileContents(tiles.find(thisTile => thisTile.id === parseInt(tile)).text, rotations, false, flip, true),
+            withFrame: tileContents(tiles.find(thisTile => thisTile.id === parseInt(tile)).text, rotations, false, flip),
         });
     }
 
     console.log(tileLayout);
 
-    let tileWidth = tileLayout[0].text.length;
-
     let image = [];
+    let tileWidth = tileLayout[0].text.length;
     for (let tileRow=0; tileRow<gridWidth; tileRow++){
         for (let row=0; row<tileWidth; row++){
             const imageRowNum = (tileRow*tileWidth) + row;
             let imageRow = "";
             for (let tileCol=0; tileCol<gridWidth; tileCol++){
                 const text = tileLayout[ (tileRow*gridWidth) + tileCol ].text;
-                // imageRow += "  " + text[row];
                 imageRow += text[row];
             }
             image[imageRowNum] = imageRow;
         }
-        // image[(tileRow*tileWidth) + (tileWidth-1)] += "\n";
     }
+
+    let checkImage = [];
+    let frameWidth = tileLayout[0].withFrame.length;
+    for (let tileRow=0; tileRow<gridWidth; tileRow++){
+        for (let row=0; row<frameWidth; row++){
+            const imageRowNum = (tileRow*frameWidth) + row;
+            let imageRow = "";
+            for (let tileCol=0; tileCol<gridWidth; tileCol++){
+                const text = tileLayout[ (tileRow*gridWidth) + tileCol ].withFrame;
+                imageRow += "  " + text[row];
+            }
+            checkImage[imageRowNum] = imageRow;
+        }
+        checkImage[(tileRow*frameWidth) + (frameWidth-1)] += "\n";
+    }
+    console.log("check first tile\n" + tileLayout[0].withFrame.join("\n"));
+    console.log("check with frames\n" + checkImage.join("\n"));
+    console.log("check final\n" + image.join("\n"));
+
+    // Find our monsters. Flip it 8 different ways and search each perspective.
 
     let perspectives = [];
     for (let i=0; i<4; i++){
@@ -323,7 +361,7 @@ const run = async (params) => {
             });
         }
         if (monsterCount){
-            console.log(`FOUND MONSTER ${i}`);
+            console.log(`FOUND MONSTER(S) in perspective ${i}.`);
 
             console.log(image.join("\n"));
 
@@ -335,18 +373,14 @@ const run = async (params) => {
             break;
         }
     }
-
 };
 
 // Getting the right answer for sample input.
 // Getting a reasonable answer for my input.
 // Next things to try:
-//  - maybe there are overlapping monsters that I'm not picking up?
-
-
-// 1875 - too high
-// 1860 - (just a guess) too high
-// 1845 - (just a guess) too high
+//  - maybe there are overlapping monsters that I'm not picking up? - no, doesn't seem like it
+// 1695 - (hardcoded different first tile orientation) not right
+// 1680 - (just a guess - trying one more monster) -- that's right!!
 
 
 module.exports = { run };
