@@ -2,6 +2,11 @@
 
 
 ---
+## Final thoughts
+
+Earned all 50 stars with only one hint needed (10.2). Not the prettiest code or the fastest, but I had fun and learned new things.
+
+---
 ## Day 25
 
 I thought the instructions were confusing. I wasn't sure if subject number 7 was just the example, or if I also needed to find a subject number.
